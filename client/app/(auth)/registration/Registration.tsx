@@ -3,12 +3,11 @@ import { Text, View, TextInput, KeyboardAvoidingView, Platform, TouchableOpacity
 import styles from './style';
 import LoadingButton from '../../../components/loadingBtn';
 import { useUserStore } from '../../../store/UserStore';
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import Toast from '../../../components/error-message'; 
 import Feather from '@expo/vector-icons/Feather';
 
 export default function Registration() {
-  const router = useRouter();
   const [email, setEmail] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -90,7 +89,7 @@ export default function Registration() {
       }
      await registration(email, login, password);
      alert('Регистрация прошла успешно!');
-     router.replace('../../main/Main');
+     router.replace('../../(app)');
      clearForm();
     } catch (error: string | any) {
       if (error.message === 'Пользователь с таким email уже существует') {
@@ -175,7 +174,7 @@ export default function Registration() {
       <LoadingButton onPress={handleSubmit} />
 
       <Text style={styles.tipoH3}>или</Text>
-      <TouchableOpacity style={styles.loginButton} onPress={() => router.push('../login/Login')}>
+      <TouchableOpacity style={styles.loginButton} onPress={() => router.replace('../login/Login')}>
         <Text style={styles.tipoH4}>Войти</Text>
       </TouchableOpacity>
 

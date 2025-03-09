@@ -36,7 +36,7 @@ export default function Login() {
       }
       await login(email, password);
       alert('Вход выполнен успешно!');
-      router.replace('../../main/Main'); 
+      router.replace('../../(app)'); 
     } catch (error: any) {
       if (error.message === 'Пользователь не найден') {
         setErrorMessage('Пользователь не найден');
@@ -92,7 +92,7 @@ export default function Login() {
       <LoadingButton onPress={handleSubmit} />
 
       <Text style={styles.tipoH3}>или</Text>
-      <TouchableOpacity style={styles.loginButton} onPress={() => router.push('../registration/Registration')}>
+      <TouchableOpacity style={styles.loginButton} onPress={() => router.replace('../registration/Registration')}>
         <Text style={styles.tipoH4}>Зарегистрироваться</Text>
       </TouchableOpacity>
 

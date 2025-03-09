@@ -23,5 +23,26 @@ export default StyleSheet.create({
         color: 'white',
         fontSize: 16,
         textAlign: 'center',
+      },
+
+
+      button: {
+        backgroundColor: 'rgb(100, 100, 100)',
+        padding: 10,
+        borderRadius: 10,
+        width: '100%',
+        marginTop: 20,
+      },
+      buttonText: {
+        color: 'white',
+        fontSize: 16,
+        textAlign: 'center',
+      },
+      input: {
+        backgroundColor: 'white',
+        padding: 10,
+        borderRadius: 10,
+        width: '100%',
+        marginTop: 20,
       }
 })

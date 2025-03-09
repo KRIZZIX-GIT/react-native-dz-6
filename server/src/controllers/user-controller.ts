@@ -29,5 +29,18 @@ class UserController {
 			next(err)
 		}
 	}
+
+	  async checkAuth(req: Request, res: Response, next: NextFunction) {
+		try {
+		  const refreshToken = req.body.refreshToken;
+		  if (!refreshToken) {
+			return
+		  }
+		  const result = await userService.checkAuth(refreshToken);
+		  res.json(result);
+		} catch (err) {
+		  next(err);
+		}
+	  }
 }
 export default new UserController()

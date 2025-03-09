@@ -31,8 +31,6 @@ class UserService {
             password: hashPass,
         });
     
-
-    
         const userDto = new UserDto(user);
         const tokens = await tokenService.generateTokens({ ...userDto });
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
@@ -58,5 +56,22 @@ class UserService {
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
         return { message: 'Всё прошло успешно', status: 200, ...tokens, user: userDto };
-      }}
+      }
+
+
+      async checkAuth(refreshToken: string) {
+        const userData = await tokenService.validateRefreshToken(refreshToken);
+        const tokenFromDb = await tokenService.findToken(refreshToken);
+    
+        if (!userData || !tokenFromDb) return
+    
+        if (typeof userData === 'object' && userData !== null && 'id' in userData) {
+          const user = await userModel.findById(userData.id);
+          
+          if (!user) return
+      
+          return { isAuth: true };
+        }
+      }
+    }
 export default new UserService()
