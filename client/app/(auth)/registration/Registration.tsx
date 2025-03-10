@@ -88,7 +88,6 @@ export default function Registration() {
         throw new Error('Пожалуйста, проверьте все поля.');
       }
      await registration(email, login, password);
-     alert('Регистрация прошла успешно!');
      router.replace('../../(app)');
      clearForm();
     } catch (error: string | any) {

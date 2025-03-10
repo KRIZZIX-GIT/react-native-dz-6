@@ -18,10 +18,10 @@ export const useUserStore = create<UserState>((set) =>  ({
         password,
       });
 
-      const { user, accessToken, refreshToken } = response.data;
+      const { user, accessToken, refreshToken } = response.data
 
-      await AsyncStorage.setItem('accessToken', accessToken);
-      await AsyncStorage.setItem('refreshToken', refreshToken);
+      await AsyncStorage.setItem('accessToken', accessToken)
+      await AsyncStorage.setItem('refreshToken', refreshToken)
 
       set({ user: response.data.user,
         tokens: {
@@ -48,10 +48,10 @@ export const useUserStore = create<UserState>((set) =>  ({
         password,
       });
 
-      const { user, accessToken, refreshToken } = response.data;
+      const { user, accessToken, refreshToken } = response.data
 
-      await AsyncStorage.setItem('accessToken', accessToken);
-      await AsyncStorage.setItem('refreshToken', refreshToken);
+      await AsyncStorage.setItem('accessToken', accessToken)
+      await AsyncStorage.setItem('refreshToken', refreshToken)
 
       set({ user: response.data.user,
         tokens: {
@@ -60,29 +60,29 @@ export const useUserStore = create<UserState>((set) =>  ({
       },
     isAuth: true });
     } catch (err: any) {
-      let errorMessage = 'Ошибка соединения';
+      let errorMessage = 'Ошибка соединения'
       
        if (err instanceof AxiosError) {
-         console.log(err.response?.data);
-         errorMessage = err.response?.data?.message || 'no json message';
+         console.log(err.response?.data)
+         errorMessage = err.response?.data?.message || 'no json message'
        } else if (err.request) {
-         errorMessage = 'Нет ответа от сервера';
+         errorMessage = 'Нет ответа от сервера'
        }
-      throw new Error(errorMessage); 
+      throw new Error(errorMessage)
     }
   },
   logout: async () => {
-    await AsyncStorage.removeItem('accessToken');
-    await AsyncStorage.removeItem('refreshToken');
-    set({ user: null, tokens: null, isAuth: false });
+    await AsyncStorage.removeItem('accessToken')
+    await AsyncStorage.removeItem('refreshToken')
+    set({ user: null, tokens: null, isAuth: false })
   },
 
   checkAuth: async () => {
-    const storedAccessToken = await AsyncStorage.getItem('accessToken');
-    const storedRefreshToken = await AsyncStorage.getItem('refreshToken');
+    const storedAccessToken = await AsyncStorage.getItem('accessToken')
+    const storedRefreshToken = await AsyncStorage.getItem('refreshToken')
     if (!storedAccessToken || !storedRefreshToken) {
-      set({ user: null, tokens: null, isAuth: false });
-      console.log('No tokens found in AsyncStorage');
+      set({ user: null, tokens: null, isAuth: false })
+      console.log('No tokens found in AsyncStorage')
       return;
     }
     try {
@@ -91,15 +91,15 @@ export const useUserStore = create<UserState>((set) =>  ({
         refreshToken: storedRefreshToken,
       });
       set({ 
-      isAuth: response.data.isAuth });
+      isAuth: response.data.isAuth })
     }catch (err: any) {
-      let errorMessage = 'Ошибка соединения';
+      let errorMessage = 'Ошибка соединения'
       if (err instanceof AxiosError) {
-        errorMessage = err.response?.data?.message || 'no json message';
+        errorMessage = err.response?.data?.message || 'no json message'
       } else if (err.request) {
-        errorMessage = 'Нет ответа от сервера';
+        errorMessage = 'Нет ответа от сервера'
       }
-      throw new Error(errorMessage);
+      throw new Error(errorMessage)
     }
   }
 

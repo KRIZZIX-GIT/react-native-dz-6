@@ -35,7 +35,6 @@ export default function Login() {
         throw new Error('Все поля должны быть заполнены.');
       }
       await login(email, password);
-      alert('Вход выполнен успешно!');
       router.replace('../../(app)'); 
     } catch (error: any) {
       if (error.message === 'Пользователь не найден') {
